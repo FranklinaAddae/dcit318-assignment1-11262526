@@ -6,7 +6,8 @@ namespace dcit_assignment1_11262526
     {
         static void Main(string[] args)
         {
-            GradeCalculator.Run();
+            //GradeCalculator.Run();
+            TicketPriceCalculator.Run();
         }
     }
 }
