@@ -1,6 +1,7 @@
 using System;
 
-namespace dcit_assignment1_11262526
+namespace dcit318_assignment1_11262526
+
 {
     public class TicketPriceCalculator
     {
