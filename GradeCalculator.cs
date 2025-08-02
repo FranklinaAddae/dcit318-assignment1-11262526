@@ -1,47 +1,38 @@
 using System;
 
 namespace dcit318_assignment1_11262526
-
 {
     public class GradeCalculator
     {
         public static void Run()
         {
             Console.WriteLine("=== Grade Calculator ===");
+            Console.Write("Enter a numerical grade (0–100): ");
+            string? input = Console.ReadLine();
 
-            while (true)
+            if (int.TryParse(input, out int grade))
             {
-                Console.Write("\nEnter a grade (0 - 100) or type 'exit' to quit: ");
-                string input = Console.ReadLine();
-
-                if (input.Trim().ToLower() == "exit")
+                if (grade < 0 || grade > 100)
                 {
-                    Console.WriteLine("Exiting Grade Calculator...");
-                    break;
+                    Console.WriteLine("Grade must be between 0 and 100.");
+                    return;
                 }
 
-                bool isValid = int.TryParse(input, out int grade);
-
-                if (!isValid || grade < 0 || grade > 100)
+                string letter = grade switch
                 {
-                    Console.WriteLine("Invalid input. Please enter a number between 0 and 100.");
-                    continue;
-                }
+                    >= 90 => "A",
+                    >= 80 => "B",
+                    >= 70 => "C",
+                    >= 60 => "D",
+                    _ => "F"
+                };
 
-                if (grade >= 90)
-                    Console.WriteLine("Grade: A");
-                else if (grade >= 80)
-                    Console.WriteLine("Grade: B");
-                else if (grade >= 70)
-                    Console.WriteLine("Grade: C");
-                else if (grade >= 60)
-                    Console.WriteLine("Grade: D");
-                else
-                    Console.WriteLine("Grade: F");
+                Console.WriteLine($"Letter grade: {letter}");
             }
-
-            Console.WriteLine("\nPress any key to exit...");
-            Console.ReadKey();
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a number.");
+            }
         }
     }
 }

@@ -6,56 +6,45 @@ namespace dcit318_assignment1_11262526
     {
         public static void Run()
         {
-            while (true)
+            Console.WriteLine("=== Triangle Type Identifier ===");
+
+            Console.Write("Enter side 1: ");
+            string? s1 = Console.ReadLine();
+
+            Console.Write("Enter side 2: ");
+            string? s2 = Console.ReadLine();
+
+            Console.Write("Enter side 3: ");
+            string? s3 = Console.ReadLine();
+
+            if (double.TryParse(s1, out double a) &&
+                double.TryParse(s2, out double b) &&
+                double.TryParse(s3, out double c))
             {
-                Console.Clear();
-                Console.WriteLine("=== Triangle Type Identifier ===");
-
-                try
+                if (a <= 0 || b <= 0 || c <= 0)
                 {
-                    Console.Write("Enter the first side: ");
-                    double side1 = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Side lengths must be greater than 0.");
+                    return;
+                }
 
-                    Console.Write("Enter the second side: ");
-                    double side2 = Convert.ToDouble(Console.ReadLine());
-
-                    Console.Write("Enter the third side: ");
-                    double side3 = Convert.ToDouble(Console.ReadLine());
-
-                    if (IsValidTriangle(side1, side2, side3))
-                    {
-                        string type = GetTriangleType(side1, side2, side3);
-                        Console.WriteLine($"\nThis is a {type} triangle.");
-                    }
+                if (a + b > c && a + c > b && b + c > a)
+                {
+                    if (a == b && b == c)
+                        Console.WriteLine("This is an Equilateral triangle.");
+                    else if (a == b || a == c || b == c)
+                        Console.WriteLine("This is an Isosceles triangle.");
                     else
-                    {
-                        Console.WriteLine("\nThe values entered cannot form a valid triangle.");
-                    }
+                        Console.WriteLine("This is a Scalene triangle.");
                 }
-                catch (FormatException)
+                else
                 {
-                    Console.WriteLine("Invalid input. Please enter numerical values only.");
+                    Console.WriteLine("These sides do not form a valid triangle.");
                 }
-
-                Console.Write("\nDo you want to check another triangle? (y/n): ");
-                string again = Console.ReadLine().ToLower();
-                if (again != "y") break;
             }
-        }
-
-        private static bool IsValidTriangle(double a, double b, double c)
-        {
-            return a + b > c && a + c > b && b + c > a;
-        }
-
-        private static string GetTriangleType(double a, double b, double c)
-        {
-            if (a == b && b == c)
-                return "Equilateral";
-            else if (a == b || a == c || b == c)
-                return "Isosceles";
             else
-                return "Scalene";
+            {
+                Console.WriteLine("Invalid input. Please enter numbers only.");
+            }
         }
     }
 }
